@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Core", "RemotelyControlledRobot.IoT\RemotelyControlledRobot.IoT.Core.csproj", "{471F1656-0AB4-4C4B-9B42-5456CD35307B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Infrastructure", "RemotelyControlledRobot.IoT.Infrastructure\RemotelyControlledRobot.IoT.Infrastructure.csproj", "{C2400F9B-563D-4EA9-B924-D2C5D43E147D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Contracts", "RemotelyControlledRobot.IoT.Contracts\RemotelyControlledRobot.IoT.Contracts.csproj", "{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemotelyControlledRobot.IoT", "RemotelyControlledRobot.IoT", "{73D99B92-E2E7-4A5E-A152-134452B31D67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemotelyControlledRobot.Framework", "RemotelyControlledRobot.Framework", "{8CD30A02-5A35-4D09-B7CB-45531A9F8DE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Framework", "RemotelyControlledRobot.Framework\RemotelyControlledRobot.Framework.csproj", "{229FA9D0-0231-408C-A6D8-C21657DE4204}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Abstract", "RemotelyControlledRobot.IoT.Abstract\RemotelyControlledRobot.IoT.Abstract.csproj", "{7D4B9011-18DE-4971-9558-4A4562FCD508}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{471F1656-0AB4-4C4B-9B42-5456CD35307B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{471F1656-0AB4-4C4B-9B42-5456CD35307B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{471F1656-0AB4-4C4B-9B42-5456CD35307B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{471F1656-0AB4-4C4B-9B42-5456CD35307B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2400F9B-563D-4EA9-B924-D2C5D43E147D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2400F9B-563D-4EA9-B924-D2C5D43E147D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2400F9B-563D-4EA9-B924-D2C5D43E147D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2400F9B-563D-4EA9-B924-D2C5D43E147D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{229FA9D0-0231-408C-A6D8-C21657DE4204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{229FA9D0-0231-408C-A6D8-C21657DE4204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{229FA9D0-0231-408C-A6D8-C21657DE4204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{229FA9D0-0231-408C-A6D8-C21657DE4204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D4B9011-18DE-4971-9558-4A4562FCD508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4B9011-18DE-4971-9558-4A4562FCD508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4B9011-18DE-4971-9558-4A4562FCD508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4B9011-18DE-4971-9558-4A4562FCD508}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2EF1F6F-C8E4-4EB6-92FD-4B3CAC660044}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
+		{471F1656-0AB4-4C4B-9B42-5456CD35307B} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
+		{C2400F9B-563D-4EA9-B924-D2C5D43E147D} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
+		{229FA9D0-0231-408C-A6D8-C21657DE4204} = {8CD30A02-5A35-4D09-B7CB-45531A9F8DE0}
+		{7D4B9011-18DE-4971-9558-4A4562FCD508} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
+	EndGlobalSection
+EndGlobal
