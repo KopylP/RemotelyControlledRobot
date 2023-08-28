@@ -6,7 +6,7 @@ The RemotelyControlledRobot project consists of multiple components that allow r
 
 - Control the robot using console commands:
   - Move the robot forward, backward, left, and right.
-  - Adjust the camera's orientation (left, right, up).
+  - Adjust the camera's orientation (left, right, ahead).
   
 - Control the robot's speed and direction using SignalR:
   - Achieve smoother and more precise robot movements.
