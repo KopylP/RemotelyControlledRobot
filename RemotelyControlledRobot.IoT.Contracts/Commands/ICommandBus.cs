@@ -2,8 +2,8 @@
 {
 	public interface ICommandBus
 	{
-		void Subscribe(string commandType, Action<string> messageCallback);
-		void Unsubscribe(string commandType, Action<string> messageCallback);
+		void Subscribe(string commandType, Action<object?> messageCallback);
+		void Unsubscribe(string commandType, Action<object?> messageCallback);
 	}
 }
 

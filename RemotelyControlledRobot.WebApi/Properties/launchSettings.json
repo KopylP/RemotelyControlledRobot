@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "Development": {
+      "commandName": "Project",
+      "applicationUrl": "http://*:5047;https://*:5048",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true
+    },
+    "Release": {
+      "commandName": "Project",
+      "applicationUrl": "http://*:5047",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Release"
+      }
+    }
+  }
+}

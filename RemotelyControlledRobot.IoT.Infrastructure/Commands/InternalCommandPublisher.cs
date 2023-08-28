@@ -3,7 +3,7 @@ using RemotelyControlledRobot.IoT.Contracts.Commands;
 
 namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
 {
-	public class InternalCommandPublisher : IInternalCommandPublisher
+	public class InternalCommandPublisher : ICommandPublisher
 	{
         private readonly ICommandQueue _memoryQueue;
 
@@ -12,7 +12,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
             _memoryQueue = memoryQueue;
                     }
 
-        void IInternalCommandPublisher.Publish(string command, string message)
+        void ICommandPublisher.Publish(string command, object? message)
         {
             _memoryQueue.Enqueue(command, message);
         }

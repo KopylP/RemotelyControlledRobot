@@ -6,11 +6,11 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
 {
 	public class MemoryCommandQueue : ICommandQueue
 	{
-        private readonly ConcurrentQueue<(string Command, string Message)> _messages = new ConcurrentQueue<(string Command, string Message)>();
+        private readonly ConcurrentQueue<(string Command, object? Message)> _messages = new ConcurrentQueue<(string Command, object? Message)>();
 
         public event Action? OnEnqueue;
 
-        public (string Command, string Message)? Dequeue()
+        public (string Command, object? Message)? Dequeue()
         {
             if (_messages.TryDequeue(out var result))
             {
@@ -20,7 +20,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
             return null;
         }
 
-        public void Enqueue(string command, string message)
+        public void Enqueue(string command, object? message)
         {
             _messages.Enqueue((command, message));
             OnEnqueue?.Invoke();

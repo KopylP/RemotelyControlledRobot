@@ -1,15 +1,15 @@
 ﻿namespace RemotelyControlledRobot.IoT.Contracts.Commands
 {
-	public interface IInternalCommandPublisher
+	public interface ICommandPublisher
 	{
-		void Publish(string command, string message);
+		void Publish(string command, object? message);
 	}
 
 	public static class IInternalCommandPublisherExtentions
 	{
-		public static void Publish(this IInternalCommandPublisher publisher, string command)
+		public static void Publish(this ICommandPublisher publisher, string command)
 		{
-			publisher.Publish(command, string.Empty);
+			publisher.Publish(command, default);
 		}
 	}
 }

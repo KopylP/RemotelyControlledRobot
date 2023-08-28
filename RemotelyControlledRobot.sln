@@ -17,6 +17,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Fra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Abstract", "RemotelyControlledRobot.IoT.Abstract\RemotelyControlledRobot.IoT.Abstract.csproj", "{7D4B9011-18DE-4971-9558-4A4562FCD508}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemotelyControllerRobot.IoT.Camera", "RemotelyControllerRobot.IoT.Camera", "{D54ADB30-D0F5-4C96-A4B3-72B7AB445C1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Camera", "RemotelyControlledRobot.IoT.Camera\RemotelyControlledRobot.IoT.Camera.csproj", "{3AF4D1C2-2722-488E-B877-D84CA8D299DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Application", "RemotelyControlledRobot.IoT.Application\RemotelyControlledRobot.IoT.Application.csproj", "{CBF44ADB-FCBD-4509-AABC-84C8DFC9F1C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemotelyControlledRobot.WebApi", "RemotelyControlledRobot.WebApi", "{A515205E-43CC-4F46-86D8-48834CC47D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.WebApi", "RemotelyControlledRobot.WebApi\RemotelyControlledRobot.WebApi.csproj", "{C0F245B7-08EB-4B75-8F68-F985037899B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Iot.Camera.Framework", "RemotelyControlledRobot.Iot.Camera.Framework\RemotelyControlledRobot.Iot.Camera.Framework.csproj", "{4C4D931F-8C26-4A88-9FB9-01A5E59DBFD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +55,22 @@ Global
 		{7D4B9011-18DE-4971-9558-4A4562FCD508}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D4B9011-18DE-4971-9558-4A4562FCD508}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D4B9011-18DE-4971-9558-4A4562FCD508}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF4D1C2-2722-488E-B877-D84CA8D299DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF4D1C2-2722-488E-B877-D84CA8D299DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF4D1C2-2722-488E-B877-D84CA8D299DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF4D1C2-2722-488E-B877-D84CA8D299DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF44ADB-FCBD-4509-AABC-84C8DFC9F1C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF44ADB-FCBD-4509-AABC-84C8DFC9F1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF44ADB-FCBD-4509-AABC-84C8DFC9F1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF44ADB-FCBD-4509-AABC-84C8DFC9F1C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0F245B7-08EB-4B75-8F68-F985037899B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0F245B7-08EB-4B75-8F68-F985037899B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0F245B7-08EB-4B75-8F68-F985037899B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0F245B7-08EB-4B75-8F68-F985037899B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C4D931F-8C26-4A88-9FB9-01A5E59DBFD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C4D931F-8C26-4A88-9FB9-01A5E59DBFD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C4D931F-8C26-4A88-9FB9-01A5E59DBFD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C4D931F-8C26-4A88-9FB9-01A5E59DBFD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,5 +84,9 @@ Global
 		{C2400F9B-563D-4EA9-B924-D2C5D43E147D} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
 		{229FA9D0-0231-408C-A6D8-C21657DE4204} = {8CD30A02-5A35-4D09-B7CB-45531A9F8DE0}
 		{7D4B9011-18DE-4971-9558-4A4562FCD508} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
+		{3AF4D1C2-2722-488E-B877-D84CA8D299DB} = {D54ADB30-D0F5-4C96-A4B3-72B7AB445C1A}
+		{CBF44ADB-FCBD-4509-AABC-84C8DFC9F1C2} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
+		{C0F245B7-08EB-4B75-8F68-F985037899B8} = {A515205E-43CC-4F46-86D8-48834CC47D6A}
+		{4C4D931F-8C26-4A88-9FB9-01A5E59DBFD6} = {D54ADB30-D0F5-4C96-A4B3-72B7AB445C1A}
 	EndGlobalSection
 EndGlobal

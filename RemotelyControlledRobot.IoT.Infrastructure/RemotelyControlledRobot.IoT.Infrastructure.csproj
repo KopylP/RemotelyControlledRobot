@@ -12,16 +12,28 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Commands\" />
-    <None Remove="Controllers\" />
+    <None Remove="Hardware\" />
+    <None Remove="Hardware\Engines\" />
+    <None Remove="Hardware\Drivers\" />
+    <None Remove="Hardware\Servos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="Hardware\" />
+    <Folder Include="Hardware\Engines\" />
+    <Folder Include="Hardware\Drivers\" />
+    <Folder Include="Hardware\Servos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RemotelyControlledRobot.IoT.Contracts\RemotelyControlledRobot.IoT.Contracts.csproj" />
+    <ProjectReference Include="..\RemotelyControlledRobot.Framework\RemotelyControlledRobot.Framework.csproj" />
+    <ProjectReference Include="..\RemotelyControlledRobot.Iot.Camera.Framework\RemotelyControlledRobot.Iot.Camera.Framework.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Device.Gpio" Version="3.0.0" />
+    <PackageReference Include="Iot.Device.Bindings" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
 </Project>

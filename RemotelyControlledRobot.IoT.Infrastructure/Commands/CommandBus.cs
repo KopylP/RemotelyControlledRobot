@@ -7,7 +7,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
     public class CommandBus : ICommandBus
     {
         private readonly ICommandQueue _commandQueue;
-        private ConcurrentDictionary<string, List<Action<string>>> _commandSubscribers = new ConcurrentDictionary<string, List<Action<string>>>();
+        private ConcurrentDictionary<string, List<Action<object?>>> _commandSubscribers = new ConcurrentDictionary<string, List<Action<object?>>>();
 
         public CommandBus(ICommandQueue commandQueue)
         {
@@ -28,13 +28,13 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
             }
         }
 
-        public void Subscribe(string commandType, Action<string> messageCallback)
+        public void Subscribe(string commandType, Action<object?> messageCallback)
         {
             messageCallback = messageCallback ?? throw new ArgumentNullException();
 
             if (!_commandSubscribers.ContainsKey(commandType))
             {
-                _commandSubscribers[commandType] = new List<Action<string>>();
+                _commandSubscribers[commandType] = new List<Action<object?>>();
             }
 
             if (!_commandSubscribers[commandType].Contains(messageCallback))
@@ -43,7 +43,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
             }
         }
 
-        public void Unsubscribe(string commandType, Action<string> messageCallback)
+        public void Unsubscribe(string commandType, Action<object?> messageCallback)
         {
             if (_commandSubscribers.ContainsKey(commandType))
             {

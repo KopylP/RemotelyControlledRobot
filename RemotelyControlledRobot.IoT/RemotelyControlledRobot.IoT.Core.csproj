@@ -20,5 +20,6 @@
     <ProjectReference Include="..\RemotelyControlledRobot.IoT.Contracts\RemotelyControlledRobot.IoT.Contracts.csproj" />
     <ProjectReference Include="..\RemotelyControlledRobot.IoT.Infrastructure\RemotelyControlledRobot.IoT.Infrastructure.csproj" />
     <ProjectReference Include="..\RemotelyControlledRobot.IoT.Abstract\RemotelyControlledRobot.IoT.Abstract.csproj" />
+    <ProjectReference Include="..\RemotelyControlledRobot.IoT.Application\RemotelyControlledRobot.IoT.Application.csproj" />
   </ItemGroup>
 </Project>
