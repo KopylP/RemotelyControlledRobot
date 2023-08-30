@@ -16,19 +16,23 @@ namespace RemotelyControlledRobot.IoT.Core
         private readonly ICommandPublisher _commandPublisher;
         private readonly IHardwareBootstrap _hardwareBootstrap;
         private readonly HubConnection _hubConnection;
+        private readonly ICommandBus _commandBus;
 
         public RobotApplication(
             IEnumerable<IController> controllers,
             ICommandPublisher commandPublisher,
             IHardwareBootstrap hardwareBootstrap,
             HubConnection hubConnection,
+            ICommandSubscriber commandSubscriber,
             ICommandBus commandBus)
         {
             _controllers = controllers;
             _commandPublisher = commandPublisher;
             _hardwareBootstrap = hardwareBootstrap;
             _hubConnection = hubConnection;
-            commandBus.Subscribe("Exit", OnCommandExit);
+            _commandBus = commandBus;
+
+            commandSubscriber.Subscribe("Exit", OnCommandExit);
         }
 
         public async Task RunAsync()
@@ -38,18 +42,27 @@ namespace RemotelyControlledRobot.IoT.Core
             // Attach a handler for graceful shutdown
             Console.CancelKeyPress += Console_CancelKeyPress;
 
-            _commandPublisher.Publish(ApplicationCommands.BeforeStart);
+            var commandBusTask = StartCommandBus();
+            await _commandPublisher.PublishAsync(ApplicationCommands.BeforeStart);
             _hardwareBootstrap.Initialize();
-
             await StartSignalRConnectionAsync();
             var controllerTasks = RunControllerHandlers();
 
             ColoredConsole.WriteLineGreen("Robot application started successfully.");
 
-            await Task.WhenAll(controllerTasks);
+            await Task.WhenAll(controllerTasks.Append(commandBusTask));
             _hardwareBootstrap.Stop();
 
             ColoredConsole.WriteLineRed("Robot application has stopped.");
+        }
+
+        private Task StartCommandBus()
+        {
+            ColoredConsole.WriteLineYellow("Starting Command Bus...");
+            var task = _commandBus.ProcessCommandsAsync(_cancellationTokenSource.Token);
+            ColoredConsole.WriteLineYellow("Command Bus was started");
+
+            return task;
         }
 
         private async Task StartSignalRConnectionAsync()

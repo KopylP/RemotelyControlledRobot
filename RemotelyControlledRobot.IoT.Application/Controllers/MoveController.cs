@@ -10,52 +10,46 @@ namespace RemotelyControlledRobot.IoT.Application.Controllers
     {
         private readonly IDriver _driver;
 
-        public MoveController(IHardwareProvider provider, ICommandBus commandBus)
+        public MoveController(IHardwareProvider provider, ICommandSubscriber commandSubscriber)
         {
             _driver = provider.GetRequiredHardware<IDriver>();
 
-            commandBus.Subscribe(MoveControllerCommands.Ahead, OnAhead);
-            commandBus.Subscribe(MoveControllerCommands.Stop, OnStop);
-            commandBus.Subscribe(MoveControllerCommands.Left, OnLeft);
-            commandBus.Subscribe(MoveControllerCommands.Right, OnRight);
-            commandBus.Subscribe(MoveControllerCommands.Back, OnBack);
-            commandBus.Subscribe(MoveControllerCommands.SpeedWithDirection, OnSpeedWithDirection);
+            commandSubscriber.Subscribe(MoveControllerCommands.Ahead, OnAhead);
+            commandSubscriber.Subscribe(MoveControllerCommands.Stop, OnStop);
+            commandSubscriber.Subscribe(MoveControllerCommands.Left, OnLeft);
+            commandSubscriber.Subscribe(MoveControllerCommands.Right, OnRight);
+            commandSubscriber.Subscribe(MoveControllerCommands.Back, OnBack);
+            commandSubscriber.Subscribe(MoveControllerCommands.SpeedWithDirection, OnSpeedWithDirection);
         }
 
         private void OnSpeedWithDirection(object? message)
         {
             var speedWithDirectionMessage = (SpeedWithDirectionMessage)message!;
             _driver.SetSpeedWithDirection(speedWithDirectionMessage.Speed, speedWithDirectionMessage.Direction);
-            Console.WriteLine($"Changed speed to {speedWithDirectionMessage.Speed}, direction to {speedWithDirectionMessage.Direction}");
         }
 
         private void OnBack(object? _)
         {
-            Console.WriteLine("Moving back");
             _driver.GoBack();
         }
 
         private void OnRight(object? _)
         {
-            Console.WriteLine("Turning right");
             _driver.GoRight();
         }
 
         private void OnLeft(object? _)
         {
-            Console.WriteLine("Turning left");
             _driver.GoLeft();
         }
 
         private void OnStop(object? _)
         {
-            Console.WriteLine("Stopping");
             _driver.Stop();
         }
 
         private void OnAhead(object? _)
         {
-            ColoredConsole.WriteLineYellow("Moving ahead");
             _driver.GoAhead();
         }
     }

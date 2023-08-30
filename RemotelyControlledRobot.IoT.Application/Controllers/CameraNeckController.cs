@@ -11,13 +11,13 @@ namespace RemotelyControlledRobot.IoT.Application.Controllers
     {
         private readonly ICameraNeck _cameraNeck;
 
-        public CameraNeckController(IHardwareProvider provider, ICommandBus commandBus)
+        public CameraNeckController(IHardwareProvider provider, ICommandSubscriber commandSubscriber)
         {
             _cameraNeck = provider.GetRequiredHardware<ICameraNeck>();
-            commandBus.Subscribe(CameraNeckControllerCommands.CameraLeft, OnCameraLeft);
-            commandBus.Subscribe(CameraNeckControllerCommands.CameraRight, OnCameraRight);
-            commandBus.Subscribe(CameraNeckControllerCommands.CameraAhead, OnCameraAhead);
-            commandBus.Subscribe(CameraNeckControllerCommands.CameraAngle, OnCameraAngle);
+            commandSubscriber.Subscribe(CameraNeckControllerCommands.CameraLeft, OnCameraLeft);
+            commandSubscriber.Subscribe(CameraNeckControllerCommands.CameraRight, OnCameraRight);
+            commandSubscriber.Subscribe(CameraNeckControllerCommands.CameraAhead, OnCameraAhead);
+            commandSubscriber.Subscribe(CameraNeckControllerCommands.CameraAngle, OnCameraAngle);
         }
 
         private void OnCameraAngle(object? message)

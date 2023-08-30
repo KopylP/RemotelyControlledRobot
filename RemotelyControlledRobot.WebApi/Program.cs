@@ -7,8 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR((opts) =>
+{
+    opts.MaximumReceiveMessageSize = 3_000_000;
+});
 
+builder.Services.AddLogging(builder =>
+{
+    builder.AddConsole(); // Use the Console logging provider
+});
 
 var app = builder.Build();
 
@@ -17,6 +24,7 @@ var app = builder.Build();
 app.MapControllers();
 
 app.MapHub<RobotHub>("/robothub");
+app.MapHub<CameraHub>("/camera");
 
 
 app.Run();

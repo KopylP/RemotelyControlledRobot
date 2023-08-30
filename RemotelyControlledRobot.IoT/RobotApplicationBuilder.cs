@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Device.Gpio;
+using System.Threading.Channels;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using RemotelyControlledRobot.Framework;
@@ -18,17 +19,36 @@ namespace RemotelyControlledRobot.IoT.Core
         private readonly IServiceCollection _services;
         public RobotApplicationBuilder(IServiceCollection services) => _services = services;
 
+        public RobotApplicationBuilder AddCommandBus()
+        {
+            ColoredConsole.WriteLineYellow("Registering Command Bus...");
+
+            var channel = Channel.CreateBounded<(string Command, object? Message)>(new BoundedChannelOptions(25)
+            {
+                SingleReader = true,
+                SingleWriter = true,
+                FullMode = BoundedChannelFullMode.DropOldest
+            });
+
+            _services.AddSingleton(channel.Reader);
+            _services.AddSingleton(channel.Writer);
+            _services.AddSingleton<ICommandSubscribersRepository, CommandSubscribersRepository>();
+            _services.AddTransient<ICommandBus, CommandBus>();
+            _services.AddTransient<ICommandPublisher, CommandPublisher>();
+            _services.AddTransient<ICommandSubscriber, CommandsSubscriber>();
+
+            return this;
+        }
+
         public RobotApplicationBuilder AddSignalR()
         {
-            ColoredConsole.WriteLineYellow("Adding SignalR...");
+            ColoredConsole.WriteLineYellow("Registering SignalR...");
 
             var hubConnection = new HubConnectionBuilder()
                 .WithUrl("http://192.168.0.31:5047/robothub") // TODO move to Configuration
                 .Build();
 
             _services.AddSingleton(hubConnection);
-
-            ColoredConsole.WriteLineGreen("SignalR added successfully.");
 
             return this;
         }
@@ -37,16 +57,11 @@ namespace RemotelyControlledRobot.IoT.Core
         {
             ColoredConsole.WriteLineYellow("Registering services...");
 
-            _services.AddSingleton<ICommandPublisher, InternalCommandPublisher>();
-            _services.AddSingleton<ICommandQueue, MemoryCommandQueue>();
-            _services.AddSingleton<ICommandBus, CommandBus>();
             _services.AddSingleton<RobotApplication>();
             _services.AddHardwares(typeof(HardwareBase));
             _services.AddControllers(typeof(ControllerBase));
             _services.AddSingleton(new GpioController(PinNumberingScheme.Logical));
             _services.AddTransient<IServoFactory, ServoFactory>();
-
-            ColoredConsole.WriteLineGreen("Services registered successfully.");
 
             return this;
         }

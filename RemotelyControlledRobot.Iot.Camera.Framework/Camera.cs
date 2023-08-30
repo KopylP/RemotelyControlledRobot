@@ -39,8 +39,8 @@ namespace RemotelyControlledRobot.Camera.Framework
         public void StartCapture()
         {
             Console.WriteLine("Starting camera device...");
-            Console.WriteLine("Waiting 20 seconds before camera is calibrated...");
-            Thread.Sleep(20_000);
+            Console.WriteLine("Waiting 5 seconds before camera is calibrated...");
+            Thread.Sleep(5);
 
             if (!_device.IsOpen)
             {

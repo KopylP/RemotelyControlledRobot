@@ -1,61 +1,31 @@
 ﻿using System.Collections.Concurrent;
 using System.Data;
+using System.Threading.Channels;
+using RemotelyControlledRobot.Framework.Extentions;
 using RemotelyControlledRobot.IoT.Contracts.Commands;
 
 namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
 {
     public class CommandBus : ICommandBus
     {
-        private readonly ICommandQueue _commandQueue;
-        private ConcurrentDictionary<string, List<Action<object?>>> _commandSubscribers = new ConcurrentDictionary<string, List<Action<object?>>>();
+        private readonly ChannelReader<(string Command, object? Message)> _channelReader;
+        private readonly ICommandSubscribersRepository _subscribersRepository;
 
-        public CommandBus(ICommandQueue commandQueue)
+        public CommandBus(ChannelReader<(string Command, object? Message)> channelReader, ICommandSubscribersRepository subscribersRepository)
         {
-            _commandQueue = commandQueue;
-            _commandQueue.OnEnqueue += CommandQueue_OnEnqueue;
+            _channelReader = channelReader;
+            _subscribersRepository = subscribersRepository;
         }
 
-        private void CommandQueue_OnEnqueue()
+        public async Task ProcessCommandsAsync(CancellationToken cancellationToken)
         {
-            var queuedCommand = _commandQueue.Dequeue();
-
-            if (queuedCommand.HasValue)
+            await foreach (var command in _channelReader.ReadAllAsync())
             {
-                var (command, message) = queuedCommand.Value;
+                if (cancellationToken.IsCancellationRequested)
+                    break;
 
-                if (_commandSubscribers.ContainsKey(command))
-                    _commandSubscribers[command].ForEach(action => action(message));
-            }
-        }
-
-        public void Subscribe(string commandType, Action<object?> messageCallback)
-        {
-            messageCallback = messageCallback ?? throw new ArgumentNullException();
-
-            if (!_commandSubscribers.ContainsKey(commandType))
-            {
-                _commandSubscribers[commandType] = new List<Action<object?>>();
-            }
-
-            if (!_commandSubscribers[commandType].Contains(messageCallback))
-            {
-                _commandSubscribers[commandType].Add(messageCallback);
-            }
-        }
-
-        public void Unsubscribe(string commandType, Action<object?> messageCallback)
-        {
-            if (_commandSubscribers.ContainsKey(commandType))
-            {
-                if (_commandSubscribers[commandType].Contains(messageCallback))
-                {
-                    _commandSubscribers[commandType].Remove(messageCallback);
-                }
-
-                if (!_commandSubscribers[commandType].Any())
-                {
-                    _commandSubscribers.Remove(commandType, out _);
-                }
+                var actions = _subscribersRepository.Get(command.Command);
+                actions.ForEach(action => action(command.Message));
             }
         }
     }
