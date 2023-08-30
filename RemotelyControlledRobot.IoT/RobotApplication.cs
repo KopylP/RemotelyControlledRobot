@@ -53,7 +53,7 @@ namespace RemotelyControlledRobot.IoT.Core
             await Task.WhenAll(controllerTasks.Append(commandBusTask));
             _hardwareBootstrap.Stop();
 
-            ColoredConsole.WriteLineRed("Robot application has stopped.");
+            ColoredConsole.WriteLineRed("Robot application has been stopped.");
         }
 
         private Task StartCommandBus()

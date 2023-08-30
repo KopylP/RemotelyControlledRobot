@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Data;
 using System.Threading.Channels;
+using RemotelyControlledRobot.Framework;
 using RemotelyControlledRobot.Framework.Extentions;
 using RemotelyControlledRobot.IoT.Contracts.Commands;
 
@@ -19,13 +20,17 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
 
         public async Task ProcessCommandsAsync(CancellationToken cancellationToken)
         {
-            await foreach (var command in _channelReader.ReadAllAsync())
+            try
             {
-                if (cancellationToken.IsCancellationRequested)
-                    break;
-
-                var actions = _subscribersRepository.Get(command.Command);
-                actions.ForEach(action => action(command.Message));
+                await foreach (var command in _channelReader.ReadAllAsync(cancellationToken))
+                {
+                    var actions = _subscribersRepository.Get(command.Command);
+                    actions.ForEach(action => action(command.Message));
+                }
+            }
+            catch(TaskCanceledException)
+            {
+                ColoredConsole.WriteLineRed("Stop commands processing.");
             }
         }
     }
