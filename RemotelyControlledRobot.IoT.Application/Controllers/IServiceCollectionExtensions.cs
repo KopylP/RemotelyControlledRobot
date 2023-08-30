@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RemotelyControlledRobot.Framework.Extentions;
+using RemotelyControlledRobot.Framework.Extensions;
 using RemotelyControlledRobot.IoT.Contracts.Controllers;
 
 namespace RemotelyControlledRobot.IoT.Application.Controllers
 {
-    public static class IServiceCollectionExtentions
+    public static class IServiceCollectionExtensions
     {
         public static IServiceCollection AddControllers(this IServiceCollection services, Type assembly)
         {

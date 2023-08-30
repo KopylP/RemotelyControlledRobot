@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Extentions\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extentions\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

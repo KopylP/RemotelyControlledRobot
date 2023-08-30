@@ -1,11 +1,8 @@
-﻿using System;
-using System.Device.Gpio;
-using System.Threading.Channels;
+﻿using System.Device.Gpio;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using RemotelyControlledRobot.Framework;
 using RemotelyControlledRobot.IoT.Application.Controllers;
-using RemotelyControlledRobot.IoT.Contracts.Commands;
 using RemotelyControlledRobot.IoT.Contracts.Hardware;
 using RemotelyControlledRobot.IoT.Contracts.Hardware.Engines;
 using RemotelyControlledRobot.IoT.Infrastructure.Commands;
@@ -27,20 +24,7 @@ namespace RemotelyControlledRobot.IoT.Core
         public RobotApplicationBuilder AddCommandBus()
         {
             ColoredConsole.WriteLineYellow("Registering Command Bus...");
-
-            var channel = Channel.CreateBounded<(string Command, object? Message)>(new BoundedChannelOptions(25)
-            {
-                SingleReader = true,
-                SingleWriter = true,
-                FullMode = BoundedChannelFullMode.DropOldest
-            });
-
-            _services.AddSingleton(channel.Reader);
-            _services.AddSingleton(channel.Writer);
-            _services.AddSingleton<ICommandSubscribersRepository, CommandSubscribersRepository>();
-            _services.AddTransient<ICommandBus, CommandBus>();
-            _services.AddTransient<ICommandPublisher, CommandPublisher>();
-            _services.AddTransient<ICommandSubscriber, CommandsSubscriber>();
+            _services.AddMessageBus();
 
             return this;
         }

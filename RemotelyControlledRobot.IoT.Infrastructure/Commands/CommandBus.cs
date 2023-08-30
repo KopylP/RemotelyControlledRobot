@@ -1,8 +1,6 @@
-﻿using System.Collections.Concurrent;
-using System.Data;
-using System.Threading.Channels;
+﻿using System.Threading.Channels;
 using RemotelyControlledRobot.Framework;
-using RemotelyControlledRobot.Framework.Extentions;
+using RemotelyControlledRobot.Framework.Extensions;
 using RemotelyControlledRobot.IoT.Contracts.Commands;
 
 namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
@@ -12,7 +10,9 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
         private readonly ChannelReader<(string Command, object? Message)> _channelReader;
         private readonly ICommandSubscribersRepository _subscribersRepository;
 
-        public CommandBus(ChannelReader<(string Command, object? Message)> channelReader, ICommandSubscribersRepository subscribersRepository)
+        public CommandBus(
+            ChannelReader<(string Command, object? Message)> channelReader,
+            ICommandSubscribersRepository subscribersRepository)
         {
             _channelReader = channelReader;
             _subscribersRepository = subscribersRepository;
@@ -22,16 +22,26 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
         {
             try
             {
-                await foreach (var command in _channelReader.ReadAllAsync(cancellationToken))
-                {
-                    var actions = _subscribersRepository.Get(command.Command);
-                    actions.ForEach(action => action(command.Message));
-                }
+                await ProcessCommandsStreamAsync(cancellationToken);
             }
             catch(TaskCanceledException)
             {
-                ColoredConsole.WriteLineRed("Stop commands processing.");
+                ColoredConsole.WriteLineRed("Commands processing was stopped.");
             }
+        }
+
+        private async Task ProcessCommandsStreamAsync(CancellationToken cancellationToken)
+        {
+            await foreach (var command in _channelReader.ReadAllAsync(cancellationToken))
+            {
+                InvokeCommandSubscribersActions(command);
+            }
+        }
+
+        private void InvokeCommandSubscribersActions((string Command, object? Message) command)
+        {
+            var actions = _subscribersRepository.Get(command.Command);
+            actions.ForEach(action => action(command.Message));
         }
     }
 }

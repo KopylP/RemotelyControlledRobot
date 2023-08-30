@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using RemotelyControlledRobot.Framework.Extentions;
+using RemotelyControlledRobot.Framework.Extensions;
 using RemotelyControlledRobot.IoT.Contracts.Hardware;
 
 namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware
 {
-	public static class IServiceCollectionExtentions
-	{
+	public static class IServiceCollectionExtensions
+    {
 		public static IServiceCollection AddHardwares(this IServiceCollection services, Type assembly)
 		{
 			var hardwareComponents = assembly.Assembly.GetAllImplementingInterface(typeof(IHardware));

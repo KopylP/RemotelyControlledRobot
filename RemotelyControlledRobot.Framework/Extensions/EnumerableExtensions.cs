@@ -1,4 +1,4 @@
-﻿namespace RemotelyControlledRobot.Framework.Extentions
+﻿namespace RemotelyControlledRobot.Framework.Extensions
 {
     public static class EnumerableExtensions
     {
