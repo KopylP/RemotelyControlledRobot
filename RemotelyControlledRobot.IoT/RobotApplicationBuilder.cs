@@ -17,7 +17,12 @@ namespace RemotelyControlledRobot.IoT.Core
     internal class RobotApplicationBuilder
     {
         private readonly IServiceCollection _services;
-        public RobotApplicationBuilder(IServiceCollection services) => _services = services;
+
+        public RobotApplicationBuilder(IServiceCollection services)
+        {
+            ColoredConsole.WriteLineYellow("Initializing robot...");
+            _services = services;
+        }
 
         public RobotApplicationBuilder AddCommandBus()
         {
