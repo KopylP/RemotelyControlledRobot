@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using RemotelyControlledRobot.Framework;
 using RemotelyControlledRobot.IoT.Abstract;
 using RemotelyControlledRobot.IoT.Contracts.Commands;
@@ -11,86 +13,87 @@ namespace RemotelyControlledRobot.IoT.Application.Controllers
         private readonly ICommandPublisher _commandPublisher;
         private string _lastMoveCommand = string.Empty;
 
-        public ConsoleController(ICommandPublisher commandPublisher) => _commandPublisher = commandPublisher;
+        public ConsoleController(ICommandPublisher commandPublisher)
+        {
+            _commandPublisher = commandPublisher;
+        }
 
         public async override Task HandleAsync(CancellationToken cancellationToken)
         {
-            await Task.Run(async () =>
+            ColoredConsole.WriteLineGreen("Console controller started. Press 'Q' to exit.");
+
+            while (!cancellationToken.IsCancellationRequested)
             {
-                ColoredConsole.WriteLineGreen("Console controller started. Press 'Q' to exit.");
+                await ProcessConsoleInputAsync();
+            }
+        }
 
-                while (!cancellationToken.IsCancellationRequested)
-                {
-                    Console.Write("\nPlease, provide command key: ");
-                    var key = Console.ReadKey();
+        private async Task ProcessConsoleInputAsync()
+        {
+            Console.Write("\nPlease, provide command key: ");
+            var key = Console.ReadKey();
 
-                    switch (key.Key)
-                    {
-                        case ConsoleKey.A:
-                            ColoredConsole.WriteLineCyan("\nSent command: Move left");
-                            await _commandPublisher.PublishAsync(MoveControllerCommands.Left);
-                            _lastMoveCommand = MoveControllerCommands.Left;
-                            break;
+            switch (key.Key)
+            {
+                case ConsoleKey.A:
+                    await SendMoveCommand(MoveControllerCommands.Left);
+                    break;
 
-                        case ConsoleKey.D:
-                            ColoredConsole.WriteLineCyan("\nSent command: Move right");
-                            await _commandPublisher.PublishAsync(MoveControllerCommands.Right);
-                            _lastMoveCommand = MoveControllerCommands.Right;
-                            break;
+                case ConsoleKey.D:
+                    await SendMoveCommand(MoveControllerCommands.Right);
+                    break;
 
-                        case ConsoleKey.S:
-                            if (_lastMoveCommand == MoveControllerCommands.Stop)
-                            {
-                                ColoredConsole.WriteLineCyan("\nSent command: Move back");
-                                await _commandPublisher.PublishAsync(MoveControllerCommands.Back);
-                                _lastMoveCommand = MoveControllerCommands.Back;
-                                break;
-                            }
+                case ConsoleKey.S:
+                    await SendMoveCommand(MoveControllerCommands.Stop, MoveControllerCommands.Back);
+                    break;
 
-                            ColoredConsole.WriteLineCyan("\nSent command: Stop");
-                            await _commandPublisher.PublishAsync(MoveControllerCommands.Stop);
-                            _lastMoveCommand = MoveControllerCommands.Stop;
-                            break;
+                case ConsoleKey.W:
+                    await SendMoveCommand(MoveControllerCommands.Ahead, MoveControllerCommands.Stop);
+                    break;
 
-                        case ConsoleKey.W:
-                            if (_lastMoveCommand == MoveControllerCommands.Back)
-                            {
-                                ColoredConsole.WriteLineCyan("\nSent command: Stop");
-                                await _commandPublisher.PublishAsync(MoveControllerCommands.Stop);
-                                _lastMoveCommand = MoveControllerCommands.Stop;
-                                break;
-                            }
+                case ConsoleKey.LeftArrow:
+                    await SendCameraCommand(CameraNeckControllerCommands.CameraLeft);
+                    break;
 
-                            ColoredConsole.WriteLineCyan("\nSent command: Move ahead");
-                            await _commandPublisher.PublishAsync(MoveControllerCommands.Ahead);
-                            _lastMoveCommand = MoveControllerCommands.Ahead;
-                            break;
+                case ConsoleKey.RightArrow:
+                    await SendCameraCommand(CameraNeckControllerCommands.CameraRight);
+                    break;
 
-                        case ConsoleKey.LeftArrow:
-                            ColoredConsole.WriteLineCyan("\nSent command: Move camera left");
-                            await _commandPublisher.PublishAsync(CameraNeckControllerCommands.CameraLeft);
-                            break;
+                case ConsoleKey.UpArrow:
+                    await SendCameraCommand(CameraNeckControllerCommands.CameraAhead);
+                    break;
 
-                        case ConsoleKey.RightArrow:
-                            ColoredConsole.WriteLineCyan("\nSent command: Move camera right");
-                            await _commandPublisher.PublishAsync(CameraNeckControllerCommands.CameraRight);
-                            break;
+                case ConsoleKey.Q:
+                    await Exit();
+                    break;
 
-                        case ConsoleKey.UpArrow:
-                            ColoredConsole.WriteLineCyan("\nSent command: Move camera ahead");
-                            await _commandPublisher.PublishAsync(CameraNeckControllerCommands.CameraAhead);
-                            break;
+                default:
+                    break;
+            }
+        }
 
-                        case ConsoleKey.Q:
-                            ColoredConsole.WriteLineCyan("\nSent command: Exit");
-                            await _commandPublisher.PublishAsync("Exit");
-                            return;
+        private async Task SendMoveCommand(string newCommand, string rebaseCommand = MoveControllerCommands.Stop)
+        {
+            if (_lastMoveCommand == newCommand)
+            {
+                newCommand = rebaseCommand;
+            }
 
-                        default:
-                            break;
-                    }
-                }
-            });
+            ColoredConsole.WriteLineCyan($"\nSent command: {newCommand}");
+            await _commandPublisher.PublishAsync(newCommand);
+            _lastMoveCommand = newCommand;
+        }
+
+        private async Task SendCameraCommand(string command)
+        {
+            ColoredConsole.WriteLineCyan($"\nSent command: {command}");
+            await _commandPublisher.PublishAsync(command);
+        }
+
+        private async Task Exit()
+        {
+            ColoredConsole.WriteLineCyan("\nSent command: Exit");
+            await _commandPublisher.PublishAsync("Exit");
         }
     }
 }

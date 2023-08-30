@@ -16,17 +16,20 @@ namespace RemotelyControlledRobot.IoT.Application.Controllers
             _hubConnection = hubConnection;
             _commandPublisher = commandPublisher;
 
-            _hubConnection.On("ReceiveSpeedAndDirection", (double speed, double direction) =>
-            {
-                ColoredConsole.WriteLineCyan($"Received speed: {speed}, direction: {direction} from SignalR.");
-                _commandPublisher.Publish(MoveControllerCommands.SpeedWithDirection, SpeedWithDirectionMessage.Of(speed, direction));
-            });
+            _hubConnection.On<double, double>("ReceiveSpeedAndDirection", ReceiveSpeedAndDirection);
+            _hubConnection.On<int, int>("ReceiveCameraAngle", ReceiveCameraAngle);
+        }
 
-            _hubConnection.On("ReceiveCameraAngle", (int cameraAngleX, int cameraAngleY) =>
-            {
-                ColoredConsole.WriteLineCyan($"Received camera angle X: {cameraAngleX}, Y: {cameraAngleY} from SignalR.");
-                _commandPublisher.Publish(CameraNeckControllerCommands.CameraAngle, new CameraAngleMessage(cameraAngleX, cameraAngleY));
-            });
+        private void ReceiveSpeedAndDirection(double speed, double direction)
+        {
+            ColoredConsole.WriteLineCyan($"Received speed: {speed}, direction: {direction} from SignalR.");
+            _commandPublisher.Publish(MoveControllerCommands.SpeedWithDirection, SpeedWithDirectionMessage.Of(speed, direction));
+        }
+
+        private void ReceiveCameraAngle(int cameraAngleX, int cameraAngleY)
+        {
+            ColoredConsole.WriteLineCyan($"Received camera angle X: {cameraAngleX}, Y: {cameraAngleY} from SignalR.");
+            _commandPublisher.Publish(CameraNeckControllerCommands.CameraAngle, new CameraAngleMessage(cameraAngleX, cameraAngleY));
         }
     }
 }
