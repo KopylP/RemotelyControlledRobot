@@ -30,8 +30,10 @@ namespace RemotelyControlledRobot.IoT.Core
             var cameraNeckSettings = new CameraNeckSettings();
             var driverSettings = new DriverSettings();
 
-            _configuration.GetSection(CameraNeckSettings.Section).Bind(cameraNeckSettings);
-            _configuration.GetSection(DriverSettings.Section).Bind(driverSettings);
+            _configuration.GetSection(CameraNeckSettings.Section)
+                .Bind(cameraNeckSettings);
+            _configuration.GetSection(DriverSettings.Section)
+                .Bind(driverSettings);
 
             _services.AddSingleton(cameraNeckSettings);
             _services.AddSingleton(driverSettings);
@@ -53,7 +55,7 @@ namespace RemotelyControlledRobot.IoT.Core
 
             var hubConnection = new HubConnectionBuilder()
                 .WithUrl(_configuration["SignalRHost"]!)
-                .WithAutomaticReconnect(retryPolicy: )
+                .WithAutomaticReconnect()
                 .Build();
 
             _services.AddSingleton(hubConnection);
@@ -65,9 +67,10 @@ namespace RemotelyControlledRobot.IoT.Core
         {
             ColoredConsole.WriteLineYellow("Registering services...");
 
-            _services.AddSingleton<RobotApplication>();
             _services.AddHardwares(typeof(HardwareBase));
             _services.AddControllers(typeof(ControllerBase), _configuration);
+
+            _services.AddSingleton<RobotApplication>();
             _services.AddSingleton(new GpioController(PinNumberingScheme.Logical));
             _services.AddTransient<IServoFactory, ServoFactory>();
 

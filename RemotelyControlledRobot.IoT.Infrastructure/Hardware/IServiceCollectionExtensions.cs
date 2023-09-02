@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using RemotelyControlledRobot.Framework.Extensions;
 using RemotelyControlledRobot.IoT.Contracts.Hardware;
 

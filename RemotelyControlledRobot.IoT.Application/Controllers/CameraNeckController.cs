@@ -1,6 +1,4 @@
-﻿using System;
-using RemotelyControlledRobot.Framework;
-using RemotelyControlledRobot.IoT.Abstract;
+﻿using RemotelyControlledRobot.IoT.Abstract;
 using RemotelyControlledRobot.IoT.Abstract.Messages;
 using RemotelyControlledRobot.IoT.Contracts.Commands;
 using RemotelyControlledRobot.IoT.Contracts.Hardware;

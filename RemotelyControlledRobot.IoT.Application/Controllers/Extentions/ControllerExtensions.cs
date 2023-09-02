@@ -1,11 +1,15 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using RemotelyControlledRobot.Framework.Extensions;
 using RemotelyControlledRobot.IoT.Contracts.Controllers;
 
-namespace RemotelyControlledRobot.IoT.Application.Controllers
+namespace RemotelyControlledRobot.IoT.Application.Controllers.Extentions
 {
-	internal static class TypeExtentions
-	{
+    internal static class ControllerExtensions
+    {
+        public static IEnumerable<Type> GetControllers(this Type assembly)
+            => assembly.Assembly.GetAllImplementingInterface(typeof(IController));
+
         public static bool ShouldBeRegistered(this Type controller, IConfiguration configuration)
         {
             var settings = controller.GetControllerSettings(configuration);
@@ -24,6 +28,9 @@ namespace RemotelyControlledRobot.IoT.Application.Controllers
 
             return controllerSettings;
         }
+
+        public static void RegisterController(this IServiceCollection services, Type controller)
+            => services.AddSingleton(typeof(IController), controller);
     }
 }
 

@@ -8,9 +8,11 @@
 
   <ItemGroup>
     <None Remove="Controllers\" />
+    <None Remove="Controllers\Extentions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Controllers\Extentions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RemotelyControlledRobot.IoT.Abstract\RemotelyControlledRobot.IoT.Abstract.csproj" />
