@@ -5,10 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using RemotelyControlledRobot.Framework;
 using RemotelyControlledRobot.IoT.Application.Controllers;
 using RemotelyControlledRobot.IoT.Contracts.Hardware;
-using RemotelyControlledRobot.IoT.Contracts.Hardware.Engines;
+using RemotelyControlledRobot.IoT.Contracts.Hardware.Servos;
 using RemotelyControlledRobot.IoT.Infrastructure.Commands;
 using RemotelyControlledRobot.IoT.Infrastructure.Hardware;
-using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Engines;
+using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Servos;
 using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Settings;
 
 namespace RemotelyControlledRobot.IoT.Core

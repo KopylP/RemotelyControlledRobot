@@ -1,6 +1,6 @@
 ﻿using System.Device.Gpio;
 using RemotelyControlledRobot.IoT.Contracts.Hardware;
-using RemotelyControlledRobot.IoT.Contracts.Hardware.Engines;
+using RemotelyControlledRobot.IoT.Contracts.Hardware.Servos;
 using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Servos;
 using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Settings;
 
@@ -13,25 +13,19 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware
         private AutoDisabledServo? _xServo;
         private AutoDisabledServo? _yServo;
 
-        private readonly IServoFactory _servoFacotry;
+        private readonly IServoFactory _servoFactory;
 
         public CameraNeck(IServoFactory servoFactory, CameraNeckSettings settings)
 		{
-            _servoFacotry = servoFactory;
+            _servoFactory = servoFactory;
             _settings = settings;
         }
 
         public override void Initialize(GpioController gpioController)
         {
-            _xServo = new AutoDisabledServo(
-                _servoFacotry.AttachSW90Servo(_settings.LeftRightServoPin),
-                reverseAngle: _settings.ReverseLeftRightServoAngle);
-            _yServo = new AutoDisabledServo(
-                _servoFacotry.AttachSW90Servo(_settings.UpDownServoPin),
-                reverseAngle: _settings.ReverseUpDownServoAngle);
-
-            WriteXAngle(90);
-            WriteYAngle(25);
+            _xServo = CreateServo(_settings.LeftRightServoPin);
+            _yServo = CreateServo(_settings.UpDownServoPin);
+            InitializeServoAngles();
         }
 
         public void TurnLeftMax()
@@ -56,6 +50,19 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware
         {
             _xServo?.Dispose();
             _yServo?.Dispose();
+        }
+
+        private AutoDisabledServo CreateServo(int servoPin)
+        {
+            return new AutoDisabledServo(
+                _servoFactory.CreateSoftwareSW90Servo(servoPin),
+                reverseAngle: _settings.ReverseLeftRightServoAngle);
+        }
+
+        private void InitializeServoAngles()
+        {
+            WriteXAngle(_settings.LeftRightServoDefaultAngle);
+            WriteYAngle(_settings.UpDownServoDefaultAngle);
         }
     }
 }

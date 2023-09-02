@@ -1,10 +1,8 @@
-﻿using System;
-using System.Device.Pwm;
-using System.Device.Pwm.Drivers;
+﻿using System.Device.Pwm.Drivers;
 using Iot.Device.ServoMotor;
-using RemotelyControlledRobot.IoT.Contracts.Hardware.Engines;
+using RemotelyControlledRobot.IoT.Contracts.Hardware.Servos;
 
-namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Engines
+namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Servos
 {
     public class ServoFactory : IServoFactory
     {
@@ -12,7 +10,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Engines
         {
         }
 
-        public ServoMotor AttachSW90Servo(int pinNumber)
+        public ServoMotor CreateSoftwareSW90Servo(int pinNumber)
         {
             var pwmChannel = new SoftwarePwmChannel(pinNumber, frequency: 50, usePrecisionTimer: true);
             var servo = new ServoMotor(pwmChannel, maximumAngle: 180, minimumPulseWidthMicroseconds: 500, maximumPulseWidthMicroseconds: 2500);

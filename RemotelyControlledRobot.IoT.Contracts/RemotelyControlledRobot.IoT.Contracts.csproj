@@ -14,13 +14,13 @@
     <None Remove="Commands\" />
     <None Remove="Controllers\" />
     <None Remove="Hardware\" />
-    <None Remove="Hardware\Engines\" />
+    <None Remove="Hardware\Servos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Controllers\" />
     <Folder Include="Hardware\" />
-    <Folder Include="Hardware\Engines\" />
+    <Folder Include="Hardware\Servos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RemotelyControlledRobot.IoT.Abstract\RemotelyControlledRobot.IoT.Abstract.csproj" />
