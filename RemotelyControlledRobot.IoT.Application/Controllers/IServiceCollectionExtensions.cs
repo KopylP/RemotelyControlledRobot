@@ -13,13 +13,16 @@ namespace RemotelyControlledRobot.IoT.Application.Controllers
             foreach (var controller in GetControllersFromAssembly(assembly.Assembly))
             {
                 if (controller.ShouldBeRegistered(configuration))
-                    services.AddSingleton(typeof(IController), controller);
+                    services.RegisterController(controller);
             }
 
             return services;
         }
 
-        private IEnumerable<Type> GetControllersFromAssembly(Assembly assembly)
+        private static IEnumerable<Type> GetControllersFromAssembly(Assembly assembly)
             => assembly.GetAllImplementingInterface(typeof(IController));
+
+        private static void RegisterController(this IServiceCollection services, Type controller)
+            => services.AddSingleton(typeof(IController), controller);
     }
 }
