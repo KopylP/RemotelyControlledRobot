@@ -1,26 +1,23 @@
 ﻿using System.Device.Gpio;
 using Iot.Device.DCMotor;
 using RemotelyControlledRobot.IoT.Contracts.Hardware;
+using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Settings;
 
 namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Drivers
 {
     public class Driver : HardwareBase, IDriver
     {
+        private readonly DriverSettings _settings;
+
         private DCMotor? _leftMotor;
         private DCMotor? _rightMotor;
 
-        private const int IN1 = 12;
-        private const int IN2 = 13;
-        private const int ENA = 6;
-
-        private const int IN4 = 20;
-        private const int IN3 = 21;
-        private const int ENB = 26;
+        public Driver(DriverSettings settings) => _settings = settings;
 
         public override void Initialize(GpioController controller)
         {
-            _leftMotor = DCMotor.Create(ENA, IN2, IN1, controller);
-            _rightMotor = DCMotor.Create(ENB, IN4, IN3, controller);
+            _leftMotor = DCMotor.Create(_settings.ENA, _settings.IN2, _settings.IN1, controller);
+            _rightMotor = DCMotor.Create(_settings.ENB, _settings.IN4, _settings.IN3, controller);
 
             Stop();
         }
@@ -31,40 +28,36 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Drivers
 
         public void GoAhead()
         {
-            _leftMotor!.Speed = 0.5;
-            _rightMotor!.Speed = 0.5;
+            SetSpeedWithDirection(0.5, 0);
         }
 
         public void GoLeft()
         {
-            _leftMotor!.Speed = 0;
-            _rightMotor!.Speed = 0.5;
+            SetSpeedWithDirection(0.5, -1);
         }
 
         public void GoRight()
         {
-            _leftMotor!.Speed = 0.5;
-            _rightMotor!.Speed = 0;
-        }
-
-        public void SetSpeedWithDirection(double speed, double direction)
-        {
-            var motorSpeeds = DriverSpeedConverter.Convert(speed, direction);
-
-            _leftMotor!.Speed = motorSpeeds.LeftMotorSpeed;
-            _rightMotor!.Speed = motorSpeeds.RightMotorSpeed;
+            SetSpeedWithDirection(0.5, 1);
         }
 
         public void Stop()
         {
-            _leftMotor!.Speed = 0;
-            _rightMotor!.Speed = 0;
+            SetSpeedWithDirection(0, 0);
         }
 
         public void GoBack()
         {
-            _leftMotor!.Speed = -0.5;
-            _rightMotor!.Speed = -0.5;
+            SetSpeedWithDirection(-0.5, 0);
+        }
+
+        public void SetSpeedWithDirection(double speed, double direction)
+        {
+            var motorSpeeds = DriverSpeedConverter
+                .Convert(speed, direction, _settings.CalibrationCoefficient);
+
+            _leftMotor!.Speed = motorSpeeds.LeftMotorSpeed;
+            _rightMotor!.Speed = motorSpeeds.RightMotorSpeed;
         }
     }
 }

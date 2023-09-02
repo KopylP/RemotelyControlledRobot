@@ -14,7 +14,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
             FullMode = BoundedChannelFullMode.DropOldest
         };
 
-        public static IServiceCollection AddMessageBus(this IServiceCollection services)
+        public static IServiceCollection AddCommandBus(this IServiceCollection services)
 		{
             var channel = Channel.CreateBounded<(string Command, object? Message)>(ChannelOptions);
 
@@ -27,6 +27,5 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Commands
 
             return services;
         }
-	}
+    }
 }
-

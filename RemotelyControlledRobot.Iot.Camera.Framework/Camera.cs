@@ -7,7 +7,7 @@ namespace RemotelyControlledRobot.Camera.Framework
     {
         private readonly VideoConnectionSettings _settings = new VideoConnectionSettings(
                 busId: 0,
-                captureSize: (640, 480),
+                captureSize: (320, 240),
                 pixelFormat: VideoPixelFormat.JPEG
                 );
 
@@ -38,10 +38,6 @@ namespace RemotelyControlledRobot.Camera.Framework
 
         public void StartCapture()
         {
-            Console.WriteLine("Starting camera device...");
-            Console.WriteLine("Waiting 5 seconds before camera is calibrated...");
-            Thread.Sleep(5);
-
             if (!_device.IsOpen)
             {
                 _device.StartCaptureContinuous();
@@ -77,6 +73,8 @@ namespace RemotelyControlledRobot.Camera.Framework
                 _device.StopCaptureContinuous();
             }
         }
+
+        public void ClearSubscribers() => _subscribers.Clear();
 
         public void Dispose()
         {

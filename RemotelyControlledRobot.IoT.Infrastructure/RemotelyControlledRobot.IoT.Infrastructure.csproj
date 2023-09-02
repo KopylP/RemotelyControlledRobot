@@ -16,6 +16,7 @@
     <None Remove="Hardware\Engines\" />
     <None Remove="Hardware\Drivers\" />
     <None Remove="Hardware\Servos\" />
+    <None Remove="Hardware\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
@@ -23,6 +24,7 @@
     <Folder Include="Hardware\Engines\" />
     <Folder Include="Hardware\Drivers\" />
     <Folder Include="Hardware\Servos\" />
+    <Folder Include="Hardware\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RemotelyControlledRobot.IoT.Contracts\RemotelyControlledRobot.IoT.Contracts.csproj" />

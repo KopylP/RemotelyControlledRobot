@@ -1,17 +1,17 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using RemotelyControlledRobot.Framework;
+﻿using RemotelyControlledRobot.Framework;
 using RemotelyControlledRobot.IoT.Abstract;
 using RemotelyControlledRobot.IoT.Contracts.Commands;
 using RemotelyControlledRobot.IoT.Contracts.Controllers;
 
 namespace RemotelyControlledRobot.IoT.Application.Controllers
 {
+    [ControllerConfiguration("Console")]
     public class ConsoleController : ControllerBase, IController
     {
         private readonly ICommandPublisher _commandPublisher;
+
         private string _lastMoveCommand = string.Empty;
+        private bool _exitDetected = false;
 
         public ConsoleController(ICommandPublisher commandPublisher)
         {
@@ -22,7 +22,7 @@ namespace RemotelyControlledRobot.IoT.Application.Controllers
         {
             ColoredConsole.WriteLineGreen("Console controller started. Press 'Q' to exit.");
 
-            while (!cancellationToken.IsCancellationRequested)
+            while (!cancellationToken.IsCancellationRequested && !_exitDetected)
             {
                 await ProcessConsoleInputAsync();
             }
@@ -94,6 +94,7 @@ namespace RemotelyControlledRobot.IoT.Application.Controllers
         {
             ColoredConsole.WriteLineCyan("\nSent command: Exit");
             await _commandPublisher.PublishAsync("Exit");
+            _exitDetected = true;
         }
     }
 }

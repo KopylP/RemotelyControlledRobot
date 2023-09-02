@@ -25,24 +25,20 @@ namespace RemotelyControlledRobot.IoT.Application.Controllers
             var cameraAngleMessage = (CameraAngleMessage)message!;
             _cameraNeck.WriteXAngle(cameraAngleMessage.CameraAngleX);
             _cameraNeck.WriteYAngle(cameraAngleMessage.CameraAngleY);
-            ColoredConsole.WriteLineCyan($"Camera angle changed. X: {cameraAngleMessage.CameraAngleX}, Y: {cameraAngleMessage.CameraAngleY}");
         }
 
         private void OnCameraAhead(object? _)
         {
-            ColoredConsole.WriteLineYellow("Camera moving ahead");
             _cameraNeck.TurnAhead();
         }
 
         private void OnCameraRight(object? _)
         {
-            ColoredConsole.WriteLineYellow("Camera turning right");
             _cameraNeck.TurnRightMax();
         }
 
         private void OnCameraLeft(object? _)
         {
-            ColoredConsole.WriteLineYellow("Camera turning left");
             _cameraNeck.TurnLeftMax();
         }
     }

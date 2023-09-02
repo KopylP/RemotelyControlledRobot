@@ -1,7 +1,5 @@
-﻿using System.Device.Gpio;
-using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 using RemotelyControlledRobot.Framework;
-using RemotelyControlledRobot.IoT.Abstract;
 using RemotelyControlledRobot.IoT.Contracts.Commands;
 using RemotelyControlledRobot.IoT.Contracts.Controllers;
 using RemotelyControlledRobot.IoT.Contracts.Hardware;
@@ -10,24 +8,22 @@ namespace RemotelyControlledRobot.IoT.Core
 {
     public class RobotApplication
     {
-        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource _controllerHandlersCancellationTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource _commandBusCancellationTokenSource = new CancellationTokenSource();
 
         private readonly IEnumerable<IController> _controllers;
-        private readonly ICommandPublisher _commandPublisher;
         private readonly IHardwareBootstrap _hardwareBootstrap;
         private readonly HubConnection _hubConnection;
         private readonly ICommandBus _commandBus;
 
         public RobotApplication(
             IEnumerable<IController> controllers,
-            ICommandPublisher commandPublisher,
             IHardwareBootstrap hardwareBootstrap,
             HubConnection hubConnection,
             ICommandSubscriber commandSubscriber,
             ICommandBus commandBus)
         {
             _controllers = controllers;
-            _commandPublisher = commandPublisher;
             _hardwareBootstrap = hardwareBootstrap;
             _hubConnection = hubConnection;
             _commandBus = commandBus;
@@ -37,32 +33,30 @@ namespace RemotelyControlledRobot.IoT.Core
 
         public async Task RunAsync()
         {
-            ColoredConsole.WriteLineYellow("Robot application starting...");
-
-            // Attach a handler for graceful shutdown
-            Console.CancelKeyPress += Console_CancelKeyPress;
-
-            var commandBusTask = StartCommandBus();
-            await _commandPublisher.PublishAsync(ApplicationCommands.BeforeStart);
-            _hardwareBootstrap.Initialize();
+            InitializeApplication();
+            BootstrapHardware();
+            StartCommandBus();
             await StartSignalRConnectionAsync();
-            var controllerTasks = RunControllerHandlers();
-
-            ColoredConsole.WriteLineGreen("Robot application started successfully.");
-
-            await Task.WhenAll(controllerTasks.Append(commandBusTask));
-            _hardwareBootstrap.Stop();
-
-            ColoredConsole.WriteLineRed("Robot application has been stopped.");
+            await RunAndWaitForControllerHandlersAsync();
+            StopRobotApplication();
         }
 
-        private Task StartCommandBus()
+        private void InitializeApplication()
+        {
+            ColoredConsole.WriteLineYellow("Robot application starting...");
+            Console.CancelKeyPress += Console_CancelKeyPress;
+        }
+
+        private void BootstrapHardware()
+        {
+            _hardwareBootstrap.Initialize();
+        }
+
+        private void StartCommandBus()
         {
             ColoredConsole.WriteLineYellow("Starting Command Bus...");
-            var task = _commandBus.ProcessCommandsAsync(_cancellationTokenSource.Token);
-            ColoredConsole.WriteLineYellow("Command Bus was started");
-
-            return task;
+            _ = _commandBus.ProcessCommandsAsync(_commandBusCancellationTokenSource.Token);
+            ColoredConsole.WriteLineGreen("Command Bus was started");
         }
 
         private async Task StartSignalRConnectionAsync()
@@ -72,24 +66,37 @@ namespace RemotelyControlledRobot.IoT.Core
             ColoredConsole.WriteLineGreen("SignalR connection started successfully!");
         }
 
-        private IEnumerable<Task> RunControllerHandlers()
+        private async Task RunAndWaitForControllerHandlersAsync()
         {
             ColoredConsole.WriteLineYellow("Running controller handlers...");
-            return _controllers.Select(controller => controller.HandleAsync(_cancellationTokenSource.Token));
+            var tasks = _controllers
+                .Select(controller => controller
+                .HandleAsync(_controllerHandlersCancellationTokenSource.Token));
+            ColoredConsole.WriteLineGreen("Robot application started successfully.");
+
+            await Task.WhenAll(tasks);
+        }
+
+        private void StopRobotApplication()
+        {
+            _hardwareBootstrap.Stop();
+            _commandBusCancellationTokenSource.Cancel();
+            ColoredConsole.WriteLineRed("Robot application has been stopped.");
         }
 
         private void OnCommandExit(object? obj)
         {
-            _cancellationTokenSource.Cancel();
+            _controllerHandlersCancellationTokenSource.Cancel();
         }
 
         private void Console_CancelKeyPress(object? sender, EventArgs e)
         {
-            if (!_cancellationTokenSource.IsCancellationRequested)
+            if (!_controllerHandlersCancellationTokenSource.IsCancellationRequested)
             {
-                ColoredConsole.WriteLineYellow("\nProcess exit detected. Stopping hardware...");
-                _cancellationTokenSource.Cancel();
+                ColoredConsole.WriteLineRed("\nProcess exit detected. Stopping hardware...");
+                _controllerHandlersCancellationTokenSource.Cancel();
                 _hardwareBootstrap.Stop();
+                _commandBusCancellationTokenSource.Cancel();
             }
         }
     }

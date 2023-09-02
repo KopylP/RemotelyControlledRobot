@@ -25,7 +25,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware
                 }
 
                 (hardwareComponent as HardwareBase)!.Initialize(_gpioController);
-                ColoredConsole.WriteLineGreen($"{hardwareComponent.GetType()} hardware was initialized.");
+                ColoredConsole.WriteLineGreen($"{hardwareComponent.GetType().Name} hardware was initialized.");
             }
         }
 
@@ -34,7 +34,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware
             foreach (var hardwareComponent in _hardwareComponents)
             {
                 (hardwareComponent as HardwareBase)!.OnStop(_gpioController);
-                ColoredConsole.WriteLineRed($"{hardwareComponent.GetType()} hardware was stopped.");
+                ColoredConsole.WriteLineRed($"{hardwareComponent.GetType().Name} hardware was stopped.");
             }
         }
     }

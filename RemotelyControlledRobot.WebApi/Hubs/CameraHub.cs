@@ -1,36 +1,62 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
 using System.Threading.Channels;
 using Microsoft.AspNetCore.SignalR;
+using RemotelyControlledRobot.WebApi.Services;
 
 namespace RemotelyControlledRobot.WebApi.Hubs
 {
-	public class CameraHub : Hub
+    public class CameraHub : Hub
     {
-        private static Channel<string>? _clientChannel;
+        private readonly StreamManager _streamMamager;
 
-		public CameraHub(ILogger<CameraHub> logger)
+		public CameraHub(StreamManager streamMamager)
 		{
+            _streamMamager = streamMamager;
 		}
+
+        public async Task ReadyToStream(string streamName)
+        {
+            _streamMamager.StartStream(streamName, Context.ConnectionId);
+            await Task.CompletedTask;
+        }
+
+        public async Task RequestJoinToStream(string streamName)
+        {
+            _streamMamager.Wait(streamName, Context.ConnectionId);
+            var streamerConnectionId = _streamMamager.GetStreamerByStreamName(streamName);
+
+            await Clients
+                .Client(streamerConnectionId)
+                .SendAsync("PrepareStream");
+        }
 
         public ChannelReader<string> DownloadStream(CancellationToken cancellationToken)
         {
-            _clientChannel = Channel.CreateUnbounded<string>();
-            return _clientChannel.Reader;
+            var channel = _streamMamager.Subscribe(Context.ConnectionId, cancellationToken);
+            return channel;
         }
 
-        public async Task UploadStream(ChannelReader<byte[]> channel)
+        public async Task UploadStream(ChannelReader<string> channel, string streamName)
 		{
-            while (await channel.WaitToReadAsync())
+            var streamTask = _streamMamager.RunStreamAsync(streamName, channel.ReadAllAsync());
+            await Clients.All.SendAsync("StreamReady");
+
+            try
             {
-                // Read all currently available data synchronously, before waiting for more data
-                while (channel.TryRead(out var frame))
-                {
-                    if (_clientChannel != null)
-                    {
-                        await _clientChannel.Writer.WriteAsync($"data:image/png;base64,{Convert.ToBase64String(frame)}");
-                    }
-                }
+                await streamTask;
             }
+            catch (OperationCanceledException)
+            {
+                _streamMamager.FinishStream(streamName);
+            }
+        }
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            var streamer = _streamMamager.GetStreamerByParticipant(Context.ConnectionId);
+
+            if (streamer != string.Empty && streamer != Context.ConnectionId)
+                await Clients.Client(streamer).SendAsync("SubscriberDisconnected");
         }
     }
 }

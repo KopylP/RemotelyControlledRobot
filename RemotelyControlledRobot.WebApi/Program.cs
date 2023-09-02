@@ -1,11 +1,15 @@
 ﻿using Microsoft.Extensions.Options;
 using RemotelyControlledRobot.WebApi.Hubs;
+using RemotelyControlledRobot.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseKestrel();
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSingleton<StreamManager>();
 
 builder.Services.AddSignalR((opts) =>
 {
