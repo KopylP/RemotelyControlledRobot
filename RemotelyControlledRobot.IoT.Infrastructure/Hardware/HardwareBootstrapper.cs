@@ -4,12 +4,12 @@ using RemotelyControlledRobot.IoT.Contracts.Hardware;
 
 namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware
 {
-    public sealed class HardwareBootstrap : IHardwareBootstrap
+    public sealed class HardwareBootstrapper : IHardwareBootstrapper
     {
         private readonly IEnumerable<IHardware> _hardwareComponents;
         private readonly GpioController _gpioController;
 
-        public HardwareBootstrap(IEnumerable<IHardware> hardwareComponents, GpioController gpioController)
+        public HardwareBootstrapper(IEnumerable<IHardware> hardwareComponents, GpioController gpioController)
         {
             _hardwareComponents = hardwareComponents;
             _gpioController = gpioController;

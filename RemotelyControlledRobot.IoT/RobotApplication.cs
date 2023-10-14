@@ -12,13 +12,13 @@ namespace RemotelyControlledRobot.IoT.Core
         private CancellationTokenSource _commandBusCancellationTokenSource = new CancellationTokenSource();
 
         private readonly IEnumerable<IController> _controllers;
-        private readonly IHardwareBootstrap _hardwareBootstrap;
+        private readonly IHardwareBootstrapper _hardwareBootstrap;
         private readonly HubConnection _hubConnection;
         private readonly ICommandBus _commandBus;
 
         public RobotApplication(
             IEnumerable<IController> controllers,
-            IHardwareBootstrap hardwareBootstrap,
+            IHardwareBootstrapper hardwareBootstrap,
             HubConnection hubConnection,
             ICommandSubscriber commandSubscriber,
             ICommandBus commandBus)

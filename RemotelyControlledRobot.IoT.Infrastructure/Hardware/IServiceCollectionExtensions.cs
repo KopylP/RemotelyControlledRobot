@@ -16,7 +16,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware
 			}
 
 			services.AddScoped<IHardwareProvider, HardwareProvider>();
-			services.AddScoped<IHardwareBootstrap, HardwareBootstrap>();
+			services.AddScoped<IHardwareBootstrapper, HardwareBootstrapper>();
 
             return services;
 		}
