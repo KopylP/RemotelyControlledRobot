@@ -3,7 +3,7 @@ using Iot.Device.ServoMotor;
 
 namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Servos
 {
-	public class AutoDisabledServo : IDisposable
+	public sealed class AutoDisabledServo : IDisposable
 	{
         private bool _disposed = false;
 
@@ -27,36 +27,30 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Servos
 
         public void WriteAngle(int angle)
         {
-            if (_previousAngle != angle)
-            {
-                _previousAngle = angle;
+            if (_previousAngle == angle) return;
+            _previousAngle = angle;
 
-                if (_reverseAngle)
-                    angle = 180 - angle;
+            if (_reverseAngle)
+                angle = 180 - angle;
 
-                StartServo();
-                _servo?.WriteAngle(angle);
-                _disableServoTimer?.Change(_delayInMillisecondsBeforeStopServo, Timeout.Infinite);
-            }
+            StartServo();
+            _servo?.WriteAngle(angle);
+            _disableServoTimer?.Change(_delayInMillisecondsBeforeStopServo, Timeout.Infinite);
         }
 
         private void DisableServo(object? state)
         {
-            if (_servoIsStarted)
-            {
-                _disableServoTimer?.Change(Timeout.Infinite, Timeout.Infinite);
-                _servo?.Stop();
-                _servoIsStarted = false;
-            }
+            if (!_servoIsStarted) return;
+            _disableServoTimer?.Change(Timeout.Infinite, Timeout.Infinite);
+            _servo?.Stop();
+            _servoIsStarted = false;
         }
 
         private void StartServo()
         {
-            if (!_servoIsStarted)
-            {
-                _servo?.Start();
-                _servoIsStarted = true;
-            }
+            if (_servoIsStarted) return;
+            _servo?.Start();
+            _servoIsStarted = true;
         }
 
         public void Dispose()
@@ -65,7 +59,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Servos
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (_disposed) return;
 

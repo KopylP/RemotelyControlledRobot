@@ -1,19 +1,31 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using RemotelyControlledRobot.IoT.Core;
+using RemotelyControlledRobot.Framework.Application;
+using RemotelyControlledRobot.Framework.Application.Lifecycle;
+using RemotelyControlledRobot.IoT.Application;
+using RemotelyControlledRobot.IoT.Application.SignalR.Lifecycle;
+using RemotelyControlledRobot.IoT.Infrastructure.Hardware;
+using RemotelyControlledRobot.IoT.Infrastructure.SignalR;
 
-var application = new RobotApplicationBuilder(new ServiceCollection(), CreateConfiguration())
-    .RegisterConfiguration()
-    .AddCommandBus()
-    .AddSignalR()
-    .RegisterServices()
-    .Build();
+using ApplicationAssemblyMarker = RemotelyControlledRobot.IoT.Application.AssemblyMarker;
+using InfrastructureAssemblyMarker = RemotelyControlledRobot.IoT.Infrastructure.AssemblyMarker;
 
-await application.RunAsync();
+IConfigurationBuilder BuildConfiguration() => new ConfigurationBuilder()
+    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+    .AddJsonFile("appsettings.json", optional: false);
+
+Type[] assemblyMarkers = [
+    ApplicationAssemblyMarker.Type,
+    InfrastructureAssemblyMarker.Type,
+];
+var builder = RobotApplicationBuilder
+    .CreateMinimal(BuildConfiguration(), assemblyMarkers);
+
+builder.Services.AddSignalR(builder.Configuration[ConfigurationKeys.SignalRHost]!);
+builder.Services.AddStartLifecycle<SignalRBootstrapper>();
+builder.Services.AddHardware(builder.Configuration);
+
+var app = builder.Build();
+
+await app.RunAsync();
 
 Environment.Exit(0);
-
-IConfiguration CreateConfiguration() => new ConfigurationBuilder()
-    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-    .AddJsonFile("appsettings.json", optional: false)
-    .Build();

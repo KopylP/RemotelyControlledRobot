@@ -1,28 +1,24 @@
 ﻿using System.Device.Gpio;
 using Iot.Device.DCMotor;
-using RemotelyControlledRobot.IoT.Contracts.Hardware;
+using RemotelyControlledRobot.Framework.System.Abstractions.Hardware;
 using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Settings;
 
 namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Drivers
 {
-    public class Driver : HardwareBase, IDriver
+    public class Driver(DriverSettings settings) : IHardware
     {
-        private readonly DriverSettings _settings;
-
         private DCMotor? _leftMotor;
         private DCMotor? _rightMotor;
 
-        public Driver(DriverSettings settings) => _settings = settings;
-
-        public override void Initialize(GpioController controller)
+        public void Initialize(GpioController controller)
         {
-            _leftMotor = DCMotor.Create(_settings.ENA, _settings.IN2, _settings.IN1, controller);
-            _rightMotor = DCMotor.Create(_settings.ENB, _settings.IN4, _settings.IN3, controller);
+            _leftMotor = DCMotor.Create(settings.ENA, settings.IN2, settings.IN1, controller);
+            _rightMotor = DCMotor.Create(settings.ENB, settings.IN4, settings.IN3, controller);
 
             Stop();
         }
 
-        public override void OnStop(GpioController gpioController)
+        public void Stop(GpioController gpioController)
             => Stop();
 
 
@@ -54,7 +50,7 @@ namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Drivers
         public void SetSpeedWithDirection(double speed, double direction)
         {
             var motorSpeeds = DriverSpeedConverter
-                .Convert(speed, direction, _settings.CalibrationCoefficient);
+                .Convert(speed, direction, settings.CalibrationCoefficient);
 
             _leftMotor!.Speed = motorSpeeds.LeftMotorSpeed;
             _rightMotor!.Speed = motorSpeeds.RightMotorSpeed;

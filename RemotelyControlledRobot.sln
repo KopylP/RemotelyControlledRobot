@@ -7,29 +7,39 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Infrastructure", "RemotelyControlledRobot.IoT.Infrastructure\RemotelyControlledRobot.IoT.Infrastructure.csproj", "{C2400F9B-563D-4EA9-B924-D2C5D43E147D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Contracts", "RemotelyControlledRobot.IoT.Contracts\RemotelyControlledRobot.IoT.Contracts.csproj", "{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemotelyControlledRobot.IoT", "RemotelyControlledRobot.IoT", "{73D99B92-E2E7-4A5E-A152-134452B31D67}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemotelyControlledRobot.Framework", "RemotelyControlledRobot.Framework", "{8CD30A02-5A35-4D09-B7CB-45531A9F8DE0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoT", "IoT", "{73D99B92-E2E7-4A5E-A152-134452B31D67}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Framework", "RemotelyControlledRobot.Framework\RemotelyControlledRobot.Framework.csproj", "{229FA9D0-0231-408C-A6D8-C21657DE4204}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Abstract", "RemotelyControlledRobot.IoT.Abstract\RemotelyControlledRobot.IoT.Abstract.csproj", "{7D4B9011-18DE-4971-9558-4A4562FCD508}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Contracts", "RemotelyControlledRobot.IoT.Contracts\RemotelyControlledRobot.IoT.Contracts.csproj", "{7D4B9011-18DE-4971-9558-4A4562FCD508}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemotelyControllerRobot.IoT.Camera", "RemotelyControllerRobot.IoT.Camera", "{D54ADB30-D0F5-4C96-A4B3-72B7AB445C1A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Camera", "Camera", "{D54ADB30-D0F5-4C96-A4B3-72B7AB445C1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Camera", "RemotelyControlledRobot.IoT.Camera\RemotelyControlledRobot.IoT.Camera.csproj", "{3AF4D1C2-2722-488E-B877-D84CA8D299DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Application", "RemotelyControlledRobot.IoT.Application\RemotelyControlledRobot.IoT.Application.csproj", "{CBF44ADB-FCBD-4509-AABC-84C8DFC9F1C2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemotelyControlledRobot.WebApi", "RemotelyControlledRobot.WebApi", "{A515205E-43CC-4F46-86D8-48834CC47D6A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{A515205E-43CC-4F46-86D8-48834CC47D6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.WebApi", "RemotelyControlledRobot.WebApi\RemotelyControlledRobot.WebApi.csproj", "{C0F245B7-08EB-4B75-8F68-F985037899B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Iot.Camera.Framework", "RemotelyControlledRobot.Iot.Camera.Framework\RemotelyControlledRobot.Iot.Camera.Framework.csproj", "{4C4D931F-8C26-4A88-9FB9-01A5E59DBFD6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Camera.SignalRStream", "RemotelyControlledRobot.IoT.Camera.SignalRStream\RemotelyControlledRobot.IoT.Camera.SignalRStream.csproj", "{CF3EEAFB-2DFB-415C-8DDE-7430DE0F0849}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Framework.System", "RemotelyControlledRobot.Framework.System\RemotelyControlledRobot.Framework.System.csproj", "{3D65B97B-6738-45B3-8EEE-6149BAFFC310}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{69461C9D-B844-4C18-816A-E33E79A73DE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Framework.Application", "RemotelyControlledRobot.Framework.Application\RemotelyControlledRobot.Framework.Application.csproj", "{2AA5E9D4-9373-4D06-8C99-31566C7664E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Framework.Application.Abstractions", "RemotelyControlledRobot.Framework.Application.Abstractions\RemotelyControlledRobot.Framework.Application.Abstractions.csproj", "{6622B73D-8BF0-4E4C-B240-7AAE18F040C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Framework.System.Abstractions", "RemotelyControlledRobot.Framework.System.Abstractions\RemotelyControlledRobot.Framework.System.Abstractions.csproj", "{C01860D7-20D6-4E1B-8E2F-689CF0F4A23F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Framework.Application.Abstractions.Lifecycle", "RemotelyControlledRobot.Framework.Application.Abstractions.Lifecycle\RemotelyControlledRobot.Framework.Application.Abstractions.Lifecycle.csproj", "{9F88099E-686B-4B5F-B77E-61E41326CBC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Framework.Application.Lifecycle", "RemotelyControlledRobot.Framework.Application.Lifecycle\RemotelyControlledRobot.Framework.Application.Lifecycle.csproj", "{43F9081C-0577-4690-B217-F32C89C5BD00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +55,6 @@ Global
 		{C2400F9B-563D-4EA9-B924-D2C5D43E147D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2400F9B-563D-4EA9-B924-D2C5D43E147D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2400F9B-563D-4EA9-B924-D2C5D43E147D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{229FA9D0-0231-408C-A6D8-C21657DE4204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{229FA9D0-0231-408C-A6D8-C21657DE4204}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{229FA9D0-0231-408C-A6D8-C21657DE4204}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,6 +83,30 @@ Global
 		{CF3EEAFB-2DFB-415C-8DDE-7430DE0F0849}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF3EEAFB-2DFB-415C-8DDE-7430DE0F0849}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF3EEAFB-2DFB-415C-8DDE-7430DE0F0849}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D65B97B-6738-45B3-8EEE-6149BAFFC310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D65B97B-6738-45B3-8EEE-6149BAFFC310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D65B97B-6738-45B3-8EEE-6149BAFFC310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D65B97B-6738-45B3-8EEE-6149BAFFC310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AA5E9D4-9373-4D06-8C99-31566C7664E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AA5E9D4-9373-4D06-8C99-31566C7664E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AA5E9D4-9373-4D06-8C99-31566C7664E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AA5E9D4-9373-4D06-8C99-31566C7664E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6622B73D-8BF0-4E4C-B240-7AAE18F040C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6622B73D-8BF0-4E4C-B240-7AAE18F040C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6622B73D-8BF0-4E4C-B240-7AAE18F040C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6622B73D-8BF0-4E4C-B240-7AAE18F040C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C01860D7-20D6-4E1B-8E2F-689CF0F4A23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C01860D7-20D6-4E1B-8E2F-689CF0F4A23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C01860D7-20D6-4E1B-8E2F-689CF0F4A23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C01860D7-20D6-4E1B-8E2F-689CF0F4A23F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F88099E-686B-4B5F-B77E-61E41326CBC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F88099E-686B-4B5F-B77E-61E41326CBC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F88099E-686B-4B5F-B77E-61E41326CBC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F88099E-686B-4B5F-B77E-61E41326CBC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43F9081C-0577-4690-B217-F32C89C5BD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43F9081C-0577-4690-B217-F32C89C5BD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43F9081C-0577-4690-B217-F32C89C5BD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43F9081C-0577-4690-B217-F32C89C5BD00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,15 +115,20 @@ Global
 		SolutionGuid = {C2EF1F6F-C8E4-4EB6-92FD-4B3CAC660044}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DEC9698E-F3F7-42BA-BF76-18C0720ABF69} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
 		{471F1656-0AB4-4C4B-9B42-5456CD35307B} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
 		{C2400F9B-563D-4EA9-B924-D2C5D43E147D} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
-		{229FA9D0-0231-408C-A6D8-C21657DE4204} = {8CD30A02-5A35-4D09-B7CB-45531A9F8DE0}
 		{7D4B9011-18DE-4971-9558-4A4562FCD508} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
 		{3AF4D1C2-2722-488E-B877-D84CA8D299DB} = {D54ADB30-D0F5-4C96-A4B3-72B7AB445C1A}
 		{CBF44ADB-FCBD-4509-AABC-84C8DFC9F1C2} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
 		{C0F245B7-08EB-4B75-8F68-F985037899B8} = {A515205E-43CC-4F46-86D8-48834CC47D6A}
 		{4C4D931F-8C26-4A88-9FB9-01A5E59DBFD6} = {D54ADB30-D0F5-4C96-A4B3-72B7AB445C1A}
 		{CF3EEAFB-2DFB-415C-8DDE-7430DE0F0849} = {D54ADB30-D0F5-4C96-A4B3-72B7AB445C1A}
+		{3D65B97B-6738-45B3-8EEE-6149BAFFC310} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
+		{229FA9D0-0231-408C-A6D8-C21657DE4204} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
+		{2AA5E9D4-9373-4D06-8C99-31566C7664E2} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
+		{6622B73D-8BF0-4E4C-B240-7AAE18F040C1} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
+		{C01860D7-20D6-4E1B-8E2F-689CF0F4A23F} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
+		{9F88099E-686B-4B5F-B77E-61E41326CBC2} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
+		{43F9081C-0577-4690-B217-F32C89C5BD00} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
 	EndGlobalSection
 EndGlobal
