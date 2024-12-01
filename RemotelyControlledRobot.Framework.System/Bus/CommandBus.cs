@@ -13,7 +13,10 @@ internal class CommandBus(
         {
             await ProcessCommandsStreamAsync(cancellationToken);
         }
-        catch(TaskCanceledException)
+        catch (TaskCanceledException)
+        {
+        }
+        finally
         {
             ColoredConsole.WriteLineRed("Commands processing was stopped.");
         }

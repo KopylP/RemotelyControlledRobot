@@ -25,6 +25,7 @@ internal static class ServiceCollectionExtensions
 
 		services.AddScoped<IHardwareProvider, HardwareProvider>();
 		services.AddStartLifecycle<HardwareBootstrapper>();
+		services.AddStopLifecycle<HardwareBootstrapper>();
 
 		return services;
 	}
