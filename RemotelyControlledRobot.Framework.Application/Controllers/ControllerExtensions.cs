@@ -12,23 +12,12 @@ internal static class ControllerExtensions
 
     public static bool ShouldBeRegistered(this Type controller, IConfiguration configuration)
     {
-        var settings = controller.GetControllerSettings(configuration);
-        return !settings.IsDisabled;
-    }
-
-    private static ControllerEnableSettings GetControllerSettings(this Type controller, IConfiguration configuration)
-    {
         var attribute = (ControllerEnableAttribute?)Attribute
             .GetCustomAttribute(controller, typeof(ControllerEnableAttribute));
-
-        var controllerSettings = new ControllerEnableSettings();
-
-        if (attribute is not null)
-            configuration.GetSection(attribute.ConfigurationKey).Bind(controllerSettings);
-
-        return controllerSettings;
+        
+        return attribute is null || configuration.GetValue<bool>(attribute.ConfigurationKey);
     }
-
+    
     public static void RegisterController(this IServiceCollection services, Type controller)
         => services.AddSingleton(typeof(IController), controller);
 }

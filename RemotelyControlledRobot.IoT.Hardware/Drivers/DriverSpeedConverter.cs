@@ -1,5 +1,4 @@
-﻿using System;
-namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Drivers
+﻿namespace RemotelyControlledRobot.IoT.Hardware.Drivers
 {
 	public static class DriverSpeedConverter
 	{

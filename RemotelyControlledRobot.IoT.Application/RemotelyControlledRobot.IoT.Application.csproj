@@ -17,9 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\RemotelyControlledRobot.Framework.Application.Abstractions.Lifecycle\RemotelyControlledRobot.Framework.Application.Abstractions.Lifecycle.csproj" />
     <ProjectReference Include="..\RemotelyControlledRobot.Framework.Application.Abstractions\RemotelyControlledRobot.Framework.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\RemotelyControlledRobot.Framework.System.Abstractions\RemotelyControlledRobot.Framework.System.Abstractions.csproj" />
     <ProjectReference Include="..\RemotelyControlledRobot.IoT.Contracts\RemotelyControlledRobot.IoT.Contracts.csproj" />
     <ProjectReference Include="..\RemotelyControlledRobot.Framework\RemotelyControlledRobot.Framework.csproj" />
-    <ProjectReference Include="..\RemotelyControlledRobot.IoT.Infrastructure\RemotelyControlledRobot.IoT.Infrastructure.csproj" />
+    <ProjectReference Include="..\RemotelyControlledRobot.IoT.Hardware\RemotelyControlledRobot.IoT.Hardware.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="8.0.11" />

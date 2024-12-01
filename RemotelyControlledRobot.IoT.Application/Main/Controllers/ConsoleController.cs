@@ -5,7 +5,7 @@ using RemotelyControlledRobot.IoT.Contracts;
 
 namespace RemotelyControlledRobot.IoT.Application.Main.Controllers
 {
-    [ControllerEnable(ConfigurationKeys.ConsoleControllerEnabled)]
+    [ControllerEnable(ConfigurationKeys.ConsoleEnabled)]
     public class ConsoleController(ICommandPublisher commandPublisher) : ControllerBase, IController
     {
         private string _lastMoveCommand = string.Empty;

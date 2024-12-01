@@ -1,7 +1,6 @@
-﻿using System;
-using Iot.Device.ServoMotor;
+﻿using Iot.Device.ServoMotor;
 
-namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Servos
+namespace RemotelyControlledRobot.IoT.Hardware.Servos
 {
 	public sealed class AutoDisabledServo : IDisposable
 	{

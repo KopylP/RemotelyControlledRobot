@@ -3,7 +3,7 @@ using Iot.Device.DCMotor;
 using RemotelyControlledRobot.Framework.System.Abstractions.Hardware;
 using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Settings;
 
-namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware.Drivers
+namespace RemotelyControlledRobot.IoT.Hardware.Drivers
 {
     public class Driver(DriverSettings settings) : IHardware
     {

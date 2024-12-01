@@ -2,7 +2,7 @@
 
 namespace RemotelyControlledRobot.IoT.Application.Main.Controllers
 {
-	[ControllerEnable(ConfigurationKeys.LoopControllerEnabled)]
+	[ControllerEnable(ConfigurationKeys.LoopEnabled)]
 	public class LoopController : ControllerBase, IController
     {
         public override async Task HandleAsync(CancellationToken cancellationToken)

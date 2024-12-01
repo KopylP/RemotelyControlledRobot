@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Settings;
 
-namespace RemotelyControlledRobot.IoT.Infrastructure.Hardware;
+namespace RemotelyControlledRobot.IoT.Hardware;
 
 public static class ServiceCollectionExtensions
 {

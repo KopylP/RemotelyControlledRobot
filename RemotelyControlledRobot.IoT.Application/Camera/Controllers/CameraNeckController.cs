@@ -3,8 +3,7 @@ using RemotelyControlledRobot.Framework.System.Abstractions.Bus;
 using RemotelyControlledRobot.Framework.System.Abstractions.Hardware;
 using RemotelyControlledRobot.IoT.Contracts;
 using RemotelyControlledRobot.IoT.Contracts.Messages;
-using RemotelyControlledRobot.IoT.Infrastructure.Hardware;
-using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Cameras;
+using RemotelyControlledRobot.IoT.Hardware.Cameras;
 
 namespace RemotelyControlledRobot.IoT.Application.Camera.Controllers;
 

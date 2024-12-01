@@ -19,14 +19,13 @@
     <None Remove="Hardware\Settings\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Hardware\Drivers\" />
-    <Folder Include="Hardware\Servos\" />
-    <Folder Include="Hardware\Settings\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\RemotelyControlledRobot.Framework.Application.Abstractions.Lifecycle\RemotelyControlledRobot.Framework.Application.Abstractions.Lifecycle.csproj" />
+    <ProjectReference Include="..\RemotelyControlledRobot.Framework.Application.Lifecycle\RemotelyControlledRobot.Framework.Application.Lifecycle.csproj" />
     <ProjectReference Include="..\RemotelyControlledRobot.Framework.System.Abstractions\RemotelyControlledRobot.Framework.System.Abstractions.csproj" />
     <ProjectReference Include="..\RemotelyControlledRobot.Framework\RemotelyControlledRobot.Framework.csproj" />
+    <ProjectReference Include="..\RemotelyControlledRobot.IoT.Application\RemotelyControlledRobot.IoT.Application.csproj" />
     <ProjectReference Include="..\RemotelyControlledRobot.Iot.Camera.Framework\RemotelyControlledRobot.Iot.Camera.Framework.csproj" />
+    <ProjectReference Include="..\RemotelyControlledRobot.IoT.Contracts\RemotelyControlledRobot.IoT.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.11" />

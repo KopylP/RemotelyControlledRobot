@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using RemotelyControlledRobot.Framework;
+using RemotelyControlledRobot.Framework.Application.Lifecycle;
+using RemotelyControlledRobot.IoT.Application.SignalR;
 
 namespace RemotelyControlledRobot.IoT.Infrastructure.SignalR;
 
@@ -16,6 +18,8 @@ public static class ServiceCollectionExtensions
             .Build();
 
         services.AddSingleton(hubConnection);
+        services.AddSingleton<ISignalRClient, SignalRHubClient>();
+        services.AddStartLifecycle<SignalRBootstrapper>();
 
         return services;
     }

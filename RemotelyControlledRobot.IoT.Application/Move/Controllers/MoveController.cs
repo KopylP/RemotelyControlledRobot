@@ -3,7 +3,7 @@ using RemotelyControlledRobot.Framework.System.Abstractions.Bus;
 using RemotelyControlledRobot.Framework.System.Abstractions.Hardware;
 using RemotelyControlledRobot.IoT.Contracts;
 using RemotelyControlledRobot.IoT.Contracts.Messages;
-using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Drivers;
+using RemotelyControlledRobot.IoT.Hardware.Drivers;
 
 namespace RemotelyControlledRobot.IoT.Application.Move.Controllers
 {
