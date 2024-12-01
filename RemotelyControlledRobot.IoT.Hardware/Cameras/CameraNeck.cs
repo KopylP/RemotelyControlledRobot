@@ -1,7 +1,7 @@
 ﻿using System.Device.Gpio;
 using RemotelyControlledRobot.Framework.System.Abstractions.Hardware;
 using RemotelyControlledRobot.IoT.Hardware.Servos;
-using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Settings;
+using RemotelyControlledRobot.IoT.Hardware.Settings;
 
 namespace RemotelyControlledRobot.IoT.Hardware.Cameras;
 

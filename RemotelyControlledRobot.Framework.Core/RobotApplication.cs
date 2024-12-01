@@ -1,8 +1,7 @@
-﻿using RemotelyControlledRobot.Framework.Application.Abstractions;
-using RemotelyControlledRobot.Framework.Application.Abstractions.Controllers;
+﻿using RemotelyControlledRobot.Framework.Application.Abstractions.Controllers;
 using RemotelyControlledRobot.Framework.Application.Abstractions.Lifecycle;
 
-namespace RemotelyControlledRobot.Framework.Application;
+namespace RemotelyControlledRobot.Framework.Core;
 
 internal class RobotApplication(
     IEnumerable<IController> controllers,

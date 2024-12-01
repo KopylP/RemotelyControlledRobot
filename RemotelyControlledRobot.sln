@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Fra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Hardware", "RemotelyControlledRobot.IoT.Hardware\RemotelyControlledRobot.IoT.Hardware.csproj", "{188BBA7C-5A83-4C32-B71D-9FD42CC04437}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.Framework.Core", "RemotelyControlledRobot.Framework.Core\RemotelyControlledRobot.Framework.Core.csproj", "{13E65E18-D2CA-4678-A6E9-D87FF468E06C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,10 @@ Global
 		{188BBA7C-5A83-4C32-B71D-9FD42CC04437}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{188BBA7C-5A83-4C32-B71D-9FD42CC04437}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{188BBA7C-5A83-4C32-B71D-9FD42CC04437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E65E18-D2CA-4678-A6E9-D87FF468E06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E65E18-D2CA-4678-A6E9-D87FF468E06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E65E18-D2CA-4678-A6E9-D87FF468E06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E65E18-D2CA-4678-A6E9-D87FF468E06C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,5 +143,6 @@ Global
 		{9F88099E-686B-4B5F-B77E-61E41326CBC2} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
 		{43F9081C-0577-4690-B217-F32C89C5BD00} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
 		{188BBA7C-5A83-4C32-B71D-9FD42CC04437} = {73D99B92-E2E7-4A5E-A152-134452B31D67}
+		{13E65E18-D2CA-4678-A6E9-D87FF468E06C} = {69461C9D-B844-4C18-816A-E33E79A73DE7}
 	EndGlobalSection
 EndGlobal

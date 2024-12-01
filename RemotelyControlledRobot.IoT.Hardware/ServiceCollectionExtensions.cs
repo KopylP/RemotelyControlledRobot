@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RemotelyControlledRobot.IoT.Infrastructure.Hardware.Settings;
+using RemotelyControlledRobot.IoT.Hardware.Settings;
 
 namespace RemotelyControlledRobot.IoT.Hardware;
 

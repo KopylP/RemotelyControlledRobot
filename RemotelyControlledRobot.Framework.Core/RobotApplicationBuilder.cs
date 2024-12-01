@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RemotelyControlledRobot.Framework.Application.Abstractions;
 using RemotelyControlledRobot.Framework.Application.Controllers;
 using RemotelyControlledRobot.Framework.System;
 
-namespace RemotelyControlledRobot.Framework.Application;
+namespace RemotelyControlledRobot.Framework.Core;
 
 public class RobotApplicationBuilder
 {
