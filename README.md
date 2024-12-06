@@ -23,6 +23,19 @@ The RemotelyControlledRobot project consists of multiple components that allow r
   - Contains a RobotHub for SignalR communication.
   - Listens on port 5047 for SignalR connections.
 
+## Application Lifecycle Management
+The project implements a robust application lifecycle management system with two key interfaces:
+
+`IStartLifecycle`: Allows components to perform initialization tasks when the application starts.
+
+`IStopLifecycle`: Provides a mechanism for components to clean up or gracefully shut down when the application stops.
+
+### Lifecycle Features
+
+- Supports multiple start and stop lifecycle handlers
+- Graceful application shutdown
+- Cancellation token support for asynchronous operations
+
 ## Usage
 
 1. **Console Control:**
@@ -67,8 +80,8 @@ To establish a connection to the RobotHub in your client application, you can us
 
 1. Clone this repository.
 2. Build and run the required projects:
-   - `RemotelyControlledRobot.Core`
-   - `RemotelyControlledRobot.IoT.Camera`
+   - `RemotelyControlledRobot.IoT.Core`
+   - `RemotelyControlledRobot.IoT.Camera.SignalRStream`
    - `RemotelyControlledRobot.WebApi`
 
 ## License
