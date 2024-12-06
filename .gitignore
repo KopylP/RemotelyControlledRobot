@@ -10,7 +10,7 @@ autom4te.cache/
 *.tar.gz
 tarballs/
 test-results/
-
+.vscode/
 # Mac bundle stuff
 *.dmg
 *.app

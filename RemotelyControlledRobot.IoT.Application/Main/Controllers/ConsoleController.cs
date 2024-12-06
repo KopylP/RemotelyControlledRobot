@@ -13,6 +13,7 @@ namespace RemotelyControlledRobot.IoT.Application.Main.Controllers
 
         public override async Task HandleAsync(CancellationToken cancellationToken)
         {
+            await Task.Yield();
             ColoredConsole.WriteLineGreen("Console controller started. Press 'Q' to exit.");
 
             while (!cancellationToken.IsCancellationRequested && !_exitDetected)
