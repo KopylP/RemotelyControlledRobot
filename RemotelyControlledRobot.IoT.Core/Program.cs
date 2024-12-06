@@ -5,12 +5,12 @@ using RemotelyControlledRobot.IoT.Core;
 using RemotelyControlledRobot.IoT.Hardware;
 using RemotelyControlledRobot.IoT.Infrastructure.SignalR;
 
-static IConfigurationBuilder BuildConfiguration() => new ConfigurationBuilder()
+static IConfigurationBuilder CreateConfigurationBuilder() => new ConfigurationBuilder()
     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
     .AddJsonFile(path: "appsettings.json", optional: false);
 
 var builder = RobotApplicationBuilder
-    .CreateMinimal(BuildConfiguration(), AssemblyMarkers.All);
+    .CreateMinimal(CreateConfigurationBuilder(), AssemblyMarkers.All);
 
 if (IsSignalREnabled(builder.Configuration))
 {
