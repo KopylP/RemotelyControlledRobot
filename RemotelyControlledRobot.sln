@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1706.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Core", "RemotelyControlledRobot.IoT\RemotelyControlledRobot.IoT.Core.csproj", "{471F1656-0AB4-4C4B-9B42-5456CD35307B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Core", "RemotelyControlledRobot.IoT.Core\RemotelyControlledRobot.IoT.Core.csproj", "{471F1656-0AB4-4C4B-9B42-5456CD35307B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotelyControlledRobot.IoT.Infrastructure", "RemotelyControlledRobot.IoT.Infrastructure\RemotelyControlledRobot.IoT.Infrastructure.csproj", "{C2400F9B-563D-4EA9-B924-D2C5D43E147D}"
 EndProject
